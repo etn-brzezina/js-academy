@@ -48,7 +48,7 @@ var pole = [];
 console.log(pole); // => []
 console.log(typeof pole); // => 'object'
 
-var pole2 = new ['omg', 'wtf'];
+var pole2 = ['omg', 'wtf'];
 console.log(pole2); // => ['omg', 'wtf']
 
 /* Přiřazení objektu do proměnné */
