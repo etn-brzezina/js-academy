@@ -9,7 +9,7 @@ Sada workshopů pro praktickou výuku JavaScriptu
   - Pole
   - Objekty
   - Funkce
-- A2
+- [A2](./A2)
   - DOM
   - BOM
   - jQuery
