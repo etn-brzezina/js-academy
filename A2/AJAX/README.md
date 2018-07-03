@@ -1,0 +1,7 @@
+# AJAX
+
+## XMLHttpRequest
+
+## Request
+
+## Response
