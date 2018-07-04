@@ -4,9 +4,8 @@ Sada workshopů pro praktickou výuku JavaScriptu
 
 ## Obsah
 - [A1](./A1)
-  - Základní informace o jazyku
-  - Proměnné
-  - Pole
+  - [Základní informace, proměnné, typy](./A1/general-info)
+  - [Pole](./A1/arrays)
   - Objekty
   - Funkce
 - [A2 (FE)](./A2)
