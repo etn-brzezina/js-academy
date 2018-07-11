@@ -22,6 +22,16 @@ console.log(arr[1]); // => 'string 2'
 console.log(arr[8]); // => undefined
 ``` 
 
+Hodnoty můžeme do pole přřazovat podobně jako do proměnných za použití indexu
+
+```js
+var arr = [];
+
+arr[0] = 'string 1';
+arr[1] = 'string 2';
+arr[2] = 'string 3';
+```
+
 ## Přidání hodnoty do pole
 
 K přidání hodnoty na konec pole slouží metoda `push()`:
@@ -51,7 +61,6 @@ while (j < arr.length) {
     j++;
 }
 ```
-
 Dnes už naštěstí existuje mnohem přímočařejší přístup pro iteraci nad polem a to pomocí metody `forEach`:
 
 ```javascript

@@ -138,17 +138,90 @@ Pokud máme `<p>` uvnitř `<div>`, oba elementy mají definovaný `click` event 
 - Při capturingu se první vykoná nejméně zanořený event a až po té jeho "podřazené" - první se tedy vykoná `click` na `<div>` a až po té na `<p>`
 
 ### Předávání parametrů
+- Funkci, která vykonává listener se vždy předává jeden parametr - Event object (je to callback)
+- Pokud chceme naší funkci předat nějaké parametry, musíme ji zanořit do další funkce
 
+```javascript
+    var customParam = 'Very important information';
+
+    document.addEventListener('click', function(e) {
+        ourCustomEventHandlerer(e, customParam);
+    });
+
+    function ourEventHandlerer(e, customParam) {
+        console.info(customParam);
+    }
+```
 
 ### removeEventListener
 
 - `removeEventListener()` odstraní konkrétní event (funkci) z vybraného elementu (funkce slouží jako identifikátor - odstraní přesně tu funkci, kterou mu předáme)
 
 ### Event object
+- Event object je parametr obsahující informace o eventu, který `addEventListener` předá naší callback funkci
+- Obsahuje spoustu vlastností a metod související s eventem
 
 #### `e.preventDefault()`
+Metoda, která zabrání vykonání defaultní akce prohlížeče
+
+```javascript
+    // Povolí psát do inputu pouze číslice
+    document.querySelectorAll('input.number').addEventListener('keydown', function(e) {
+        // Stisknuté tlačítko vypisuje písmeno
+        if(e.key.match(/[[:digit:]]+/g).length !== 0) {
+            // Zabrání vypsání znaku
+            e.preventDefault();
+        }
+    });
+```
+
 #### `e.stopPropagation()`
+Zabrání propagaci eventů - bubbling, nebo capturing
+
+```javascript
+    // TODO: vymyslet nějaký smysluplný příklad
+```
+
 #### `e.target`
+- Vlastnost obsahující referenci na element, který spustil event
+
+```javascript
+    var dropdowns = document.querySelectorAll('.dropdown');
+
+    for(var i = 0; i < dropdowns.length; i++) {
+        dropdowns[i].addEventListener('click', function(e) {
+            dropdowns[i].classList.add('open');
+        });
+    }
+
+    document.addEventListener('click', function(e) {
+        var clickInsideDropdown = false;
+        var openedDropdowns = document.querySelectorAll('.dropdown.open');
+
+        if(openedDropdowns[0].contains(event.target)) clickInsideDropdown = true;
+
+        if(!clickInsideDropdown) {
+            openedDropdowns[0].classList.remove('open');
+        }
+    })
+```
+
+```javascript
+    document.addEventListener('click', function(e) {
+        var clickInsideDropdown = false;
+        var openedDropdowns = document.querySelectorAll('.dropdown.open');
+
+        if(event.target.classList.contains('dropdown') && !event.target.classList.contains('open')) {
+            event.target.classList.add('open');
+        }
+
+        if(openedDropdowns[0].contains(event.target)) clickInsideDropdown = true;
+
+        if(!clickInsideDropdown) {
+            openedDropdowns[0].classList.remove('open');
+        }
+    })
+```
 
 ### Event reference
 Kompletní seznam všechy typů eventů, metod a vlastností můžeme najít na [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Event)
@@ -201,14 +274,10 @@ Kompletní seznam všechy typů eventů, metod a vlastností můžeme najít na 
 | ------------------------------------------------ | ------------------------------------------------------------- |
 | document.createElement(element)                  | Vytvoří nový HTML element (ale nikam ho nevloží)              |
 | document.removeChild(element)                    | Odstraní HTML element                                         |
-| document.getElementById(id).appendChild(element) | Přidá do struktury (elementu s předaným id) nový HTML element |
+| document.getElementById(id).appendChild(element) | Přidá na konec struktury (elementu s předaným id) nový HTML element
+document.getElementById(id).insertBefore(element) | Přidá do struktury (za element s předaným id) nový HTML element |
 | document.replaceChild(element)                   | Vymění HTML element za jiný                                   |
 
-## Práce s uzly (elementy)
-
-### Přidávání elementů
-
-### Odstraňování elementů
 
 ```html
 <html>
@@ -223,10 +292,29 @@ Kompletní seznam všechy typů eventů, metod a vlastností můžeme najít na 
 ```
 
 ## Navigace
-
 - parentNode
 - childNodes[nodenumber]
 - firstChild
 - lastChild
 - nextSibling
 - previousSibling
+
+![alt text](https://www.w3schools.com/js/pic_htmltree.gif)
+
+### element.parentNode
+Vlastnost s referencí na přímeho rodiče elementu
+
+### element.childNodes
+Vlastnost obsahující pole reference na dětské elementy
+
+### element.firstChild
+Vlastnost obsahující referenci na prvního potomka
+
+### element.lastChild
+Vlastnost obsahující referenci na poslendího potomka
+
+### element.nextSibling
+Vlastnost obsahující referenci na element ve stejné úrovni (má stejného rodiče) a je za daným elementerm
+
+### element.previousSibling
+Vlastnost obsahující referenci na element ve stejné úrovni (má stejného rodiče) a je za před elementerm

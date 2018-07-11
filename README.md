@@ -6,8 +6,8 @@ Sada workshopů pro praktickou výuku JavaScriptu
 - [A1](./A1)
   - [Základní informace, proměnné, typy](./A1/general-info)
   - [Pole](./A1/arrays)
-  - Objekty
   - Funkce
+  - Objekty
 - [A2 (FE)](./A2)
   - [DOM](./A2/DOM)
   - [BOM](./A2/BOM)

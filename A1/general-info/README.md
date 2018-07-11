@@ -4,6 +4,134 @@
 - dokáže běžet v prohlížeči i na serveru
 - nekompiluje se - je tzv. runtime based
 
+## Script
+
+V HTML můžeme zapsat script přimo do `<script>` a `</script>` tagů, v tagovém případě se kód vyhodnotí přímo na místě kde script zapíšeme
+
+```html
+<html>
+    <body>
+    <p>Hello world!!! 
+        <script>
+            document.write("This is my First JavaScript!");
+        </script>
+    </p>
+    </body>
+</html>
+```
+
+_document.write dnes nemá a nejspíš nikdy neměl žádné reálné využití, zmiňuji ho pouze jako ukázku_
+
+## Soubory .js
+
+HTML `<script>` tag nám ale zároveň umožňuje zadat cestu k `.js` souboru, ve kterém máme pouze náš JS kód
+
+_index.html_
+
+```html
+<script src="./js/main.js"></script>
+```
+
+_main.js_
+
+```js
+alert("My First JavaScript!");
+```
+
+_alert je další způsob uživatelského outputu_
+
+## Kam s ním?
+- Do HTML dokumentu můžeme vložit libovolné množství scriptů
+- HTML dokument se načítá postupně od začátku po konec
+- Pokud narazí na `<script>` nepokračuje ve vykreslování dalšího obsahu, dokud celý script nenačte
+- Pokud potřebujeme inicializovat nějakou logiku "co nejdříve po načtení stránky" (Google Analytics), umisťujeme scripty do `<head>` dokumentu
+- V případě kdy náš script neovlvňuje vypsání obsahu a je možné ho načíst až po HTML dokumentu, vložíme ho nakonec `<body>` (rychleji se nám načte content stránky a styly, script se spustí až nakonec)
+
+## Console
+- Console slouží jako u většiny programovacích jazyků jako development output
+- Máme k dizpozici několik úrovní "severity", nebo chceme-li "typu" zprávy:
+    - `console.info()` je čistě informativní zpráva
+    - `console.log()` je pro výpis nějakých obecných informací o průběhu scriptu
+    - `console.warning()` pro nějaké varování
+    - `console.error()` pro výpis chyby
+
+## Syntax
+- Středníky a složené závorky!!!
+- JavaScript je case-sensitive
+- Lower Camel Case?
+
+## Komentáře
+- Máme možnost používat inline, nebo blokové komentáře
+- Kód uvnitř komentářů se nevyhodnotí
+
+```js
+// console.log('This is never going to be logged');
+
+/*
+* alert('Neither will this');
+*/
+```
+
+### jsDoc
+- jsDoc je API umožňující generovat dokumentaci z popisu v JS komentářích
+- Více si o něm povíme později
+
+## Statements
+- Program je seznam "instrukcí", které má počítač vykonat
+- V programovacím jazyce těmto instrukcím říkáme _statements_ (?příkazy)
+- Jednotlivé příkazy oddělujeme středníky
+
+```js
+var x, y, z;    // Statement 1
+x = 5;          // Statement 2
+y = 6;          // Statement 3
+z = x + y;      // Statement 4
+```
+
+## Operátory
+
+### Aritmetické operátory
+| Operátor        | Popis                       |
+| ------------- | --------------------------- |
+| `+` | Součet |
+| `-` | Odečet |
+| `*` | Násobení |
+| `/` | Dělení |
+| `%` | Modulus (zbytek po celočíselném dělení) |
+| `++` | Inkrementace |
+| `--` | Dekrementace |
+
+### Přiřazování hodnot
+| Operátor      |   Stejné jako |
+| ------------- |  ------------- |
+| `=`  | 	přiřazení hodnoty |
+| `+=` | 	`x = x + y` |
+| `-=` | `x = x - y` |
+| `*=` | 	`x = x * y` |
+| `/=` | `x = x / y` |
+| `%=` | `x = x % y` |
+
+### Porovávání
+
+| Operátor      |   Popis |
+| ------------- |  ------------- |
+| `==` | Rovná se |
+| `===`  | Rovná se a má stejný typ |
+| `!=`  | Nerovná se |
+| `!==`  | Nerovná se, nebo nemá stejný typ |
+| `>`  | Více než |
+| `<`  | Méně než |
+| `>=`  | Více, nebo rovno než |
+| `<=`  | Méně, nebo rovno než |
+| `?`  | Ternární operátor |
+
+### Logické operátory
+
+| Operátor      |   Popis |
+| ------------- |  ------------- |
+| `&&`	  | A zároveň |
+| `||`	  | Nebo |
+
 ## Datové typy
 
 JS obsahuje šest primitivních datových typů:
@@ -110,80 +238,62 @@ var b = a.toString();
 console.log(b); // => '12'
 ```
 
-## Podmínky a porovnávání
+## Funkce
+Funkce nám umožňují používat stejný kód vícekrát a s různým výsledkem v závislosti na předaných parametrech
+- Funkce jsou blok kódu, který vykonává určitou činnost (sada příkazů)  
+- Funkce se vykoná, když ji něco invokuje (zavolá)
+- Funkci definujeme pomocí kličového slova `function`, je identifikována jménem a kulatými závorkami pro předání __parametrů__
+- parametry jsou proměnné, do kterých můžeme funkci předat nějaké hodnoty
+- parametry se chovají jako lokální proměnné
+- Funkce můžou vracet hodnoty
 
-Inline `if` podmínka:
-```javascript
-if(true) callSomeFunction();
-```
-
-Bloková `if` podmínka:
-```javascript
-if(true) { //vykoná se vždy
-    callSomeFunction();
-} else {
-    callOtherFunction();
+```js
+function name(parameter1, parameter2, parameter3) {
+    code to be executed
 }
 ```
+_Zápis funkce_
 
-Switch/Case podmínka:
-```javascript
-var condition = 'hello';
+```js
+var x = myFunction(4, 3);    // Function is called, return value will end up in x
 
-switch(condition) {
-    case 'ahoj':
-        callSomeFunction();
-        break;
-    case 'hello':
-        callOtherFunction();
-        break;
-    default:
-        callDefaultFunction();        
+function myFunction(a, b) {
+    return a * b;            // Function returns the product of a and b
 }
 ```
+_Funkce která vynásobí dvě předaná čísla_
 
-## Logické operace
+## Objekty
+- Objekty můžeme abstraktně vnímat jako cokoliv co má nějaké vlastnosti a funkce (metody)
+- Velice zjednodušeně se dá říct, že jde o nějaký "kontejner" pro různé vlastnosti a metody, které můžou nabývat různých hodnot
+- Hodnoty jsou v objektu "uloženy" jako páry __název:hodnota__
 
-Negace:
-```javascript
-if(!false) callSomeFunction();
+### Definice
 
-var a = 3;
-if (a != 4) callSomeFunction();
+```js
+var person = {
+    firstName:"John",
+    lastName:"Doe",
+    age:50,
+    eyeColor:"blue",
+    fullName : function() {
+        return this.firstName + " " + this.lastName;
+    }
+};
 ```
 
-### Pravdivé a nepravdivé hodnoty
-Všechny hodnoty v JavaScriptu mohou být vyhodnoceny jako pravdivé nebo nepravdivé(truthy/falsy) -  jsou konvertovány na `true`/`false`.
+### Přistupování k hodnotám
+K hodnotám můžeme přistupovat pomocí __.__ nebo hranatých závorek a jejich názvu
 
-Příklady pravdivě vyhodnocených výrazů:
-```javascript
-if (true)
-if ({})
-if ([])
-if (42)
-if ("foo")
-if (new Date())
-if (-42)
-if (3.14)
-if (-3.14)
-if (Infinity)
-if (-Infinity)
+```js
+objectName.propertyName
+objectName["propertyName"]
+
+objectName.methodName()
+objectName["methodName"]() // No fuj.
 ```
 
-Příklady nepravdivě vyhodnocených výrazů:
-```javascript
-if (false)
-if (null)
-if (undefined)
-if (0)
-if (NaN)
-if ('')
-if ("")
-```
-
-Pro převedení jakékoliv hodnoty na boolean můžeme tedy využít dvojitou negaci:
-```javascript
-var a = 'hello!';
-
-console.log(!!a); // => true
-```
+### `This` keyword
+- V definici funkce odkazuje na "vlastníka" funkce
+- V předchozím příkladu metoda `fullName` patří do objektu `person`
+- `this` tedy odkazuje na objekt `person`, kterému funkce `fullName` patří
