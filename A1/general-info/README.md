@@ -263,6 +263,9 @@ function myFunction(a, b) {
 ```
 _Funkce která vynásobí dvě předaná čísla_
 
+### Callback
+
+
 ## Objekty
 - Objekty můžeme abstraktně vnímat jako cokoliv co má nějaké vlastnosti a funkce (metody)
 - Velice zjednodušeně se dá říct, že jde o nějaký "kontejner" pro různé vlastnosti a metody, které můžou nabývat různých hodnot
