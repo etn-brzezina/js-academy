@@ -17,8 +17,8 @@ HTML DOM je prostředek který nám umožňuje přistupovat, měnit, přidávat 
 - Měnit HTML elementy na stránce
 - Měnit atributy HTML elementů
 - Měnit CSS
-- Přidávat nové elemnty a atributy
-- Mazat existující elemnty a atributy
+- Přidávat nové elementy a atributy
+- Mazat existující elementy a atributy
 - Reagovat na existující eventy na stránce
 - Vytvářet nové eventy
 
@@ -132,7 +132,7 @@ Event listenery nám umožňují vytvářet/odebírat eventy na konkrétní elem
 ### Bubbling a capturing
 V JavaScriptu jsou dvě možnosti jak se vypořádat s "pořadím" ve kterém se mají eventy zavolat - bubbling a capturing
 
-Pokud máme `<p>` uvnitř `<div>`, oba elementy mají definovaný `click` event a klikneme na na odstavec, který event se má vykonat první?
+Pokud máme `<p>` uvnitř `<div>`, oba elementy mají definovaný `click` event a klikneme na odstavec, který event se má vykonat první?
 
 - Při bubblingu se první vykoná nejvíce zanořený event a až po té jeho "nadřazené" - první se tedy vykoná `click` na `<p>` a až po té na `<div>`
 - Při capturingu se první vykoná nejméně zanořený event a až po té jeho "podřazené" - první se tedy vykoná `click` na `<div>` a až po té na `<p>`
@@ -164,22 +164,58 @@ Pokud máme `<p>` uvnitř `<div>`, oba elementy mají definovaný `click` event 
 #### `e.preventDefault()`
 Metoda, která zabrání vykonání defaultní akce prohlížeče
 
-```javascript
-    // Povolí psát do inputu pouze číslice
-    document.querySelectorAll('input.number').addEventListener('keydown', function(e) {
-        // Stisknuté tlačítko vypisuje písmeno
-        if(e.key.match(/[[:digit:]]+/g).length !== 0) {
-            // Zabrání vypsání znaku
-            e.preventDefault();
-        }
-    });
+```html
+    <html>
+        <body>
+            <form id="my_form" action="/" method="post">
+                <input type="text" name="text_field" />
+                <button type="submit">Odeslat</button>
+            </form>
+            <script>
+                var formElement = document.getElementById('my_form');
+                
+                formElement.addEventListener('submit', function(event) {
+                   event.preventDefault();
+                   
+                   // handle with AJAX...
+                });
+            </script>
+        </body>
+    </html>
 ```
 
 #### `e.stopPropagation()`
 Zabrání propagaci eventů - bubbling, nebo capturing
 
-```javascript
-    // TODO: vymyslet nějaký smysluplný příklad
+```html
+    <html>
+        <body>
+            <div id="wrapper">
+                <div>
+                    <p>Lorem ipsum dolor sit amet banán</p>
+                </div>
+                <div>
+                    <button id="btn">Click me!</button>
+                </div>
+            </div>
+            <script>
+                var wrapperElement = document.getElementById('wrapper');
+                var btnElement = document.getElementById('btn');
+                
+                wrapperElement.addEventListener('click', function(event) {
+                    console.log('Wrapper clicked!');
+                    // do something... 
+                });
+                
+                btnElement.addEventListener('click', function(event) {
+                   event.stopPropagation();
+                   console.log('Button clicked!');
+                   
+                   // do more stuff...
+                });
+            </script>
+        </body>
+    </html>
 ```
 
 #### `e.target`
