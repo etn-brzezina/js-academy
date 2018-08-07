@@ -35,12 +35,13 @@ HTML DOM je prostředek který nám umožňuje přistupovat, měnit, přidávat 
 
 ## Hledání elementů
 
-| Metoda                                  | Popis                                                  |
-| --------------------------------------- | ------------------------------------------------------ |
-| document.getElementById(id)             | Najde element podle id atributu                        |
-| document.getElementsByTagName(name)     | Najde kolekci elementů podle tagu                      |
-| document.getElementsClassName(class)    | Najde kolekci elementů podle css třídy                 |
-| document.querySelectorAll(css selektor) | Najde kolekci elementů podle libovolného css selektoru |
+| Metoda                                  | Popis                                                      |
+| --------------------------------------- | ---------------------------------------------------------- |
+| document.getElementById(id)             | Najde element podle id atributu                            |
+| document.getElementsByTagName(name)     | Najde kolekci elementů podle tagu                          |
+| document.getElementsClassName(class)    | Najde kolekci elementů podle css třídy                     |
+| document.querySelector(css selektor)    | Najde první element odpovídající libovolnému css selektoru |
+| document.querySelectorAll(css selektor) | Najde kolekci elementů podle libovolného css selektoru     |
 
 ```html
 <html>
@@ -161,7 +162,7 @@ Pokud máme `<p>` uvnitř `<div>`, oba elementy mají definovaný `click` event 
 - Event object je parametr obsahující informace o eventu, který `addEventListener` předá naší callback funkci
 - Obsahuje spoustu vlastností a metod související s eventem
 
-#### `e.preventDefault()`
+#### `event.preventDefault()`
 Metoda, která zabrání vykonání defaultní akce prohlížeče
 
 ```html
@@ -184,7 +185,7 @@ Metoda, která zabrání vykonání defaultní akce prohlížeče
     </html>
 ```
 
-#### `e.stopPropagation()`
+#### `event.stopPropagation()`
 Zabrání propagaci eventů - bubbling, nebo capturing
 
 ```html
@@ -218,7 +219,7 @@ Zabrání propagaci eventů - bubbling, nebo capturing
     </html>
 ```
 
-#### `e.target`
+#### `event.target`
 - Vlastnost obsahující referenci na element, který spustil event
 
 ```javascript
@@ -311,7 +312,7 @@ Kompletní seznam všechy typů eventů, metod a vlastností můžeme najít na 
 | document.createElement(element)                  | Vytvoří nový HTML element (ale nikam ho nevloží)              |
 | document.removeChild(element)                    | Odstraní HTML element                                         |
 | document.getElementById(id).appendChild(element) | Přidá na konec struktury (elementu s předaným id) nový HTML element
-document.getElementById(id).insertBefore(element) | Přidá do struktury (za element s předaným id) nový HTML element |
+| document.getElementById(id).insertBefore(element)| Přidá do struktury (za element s předaným id) nový HTML element |
 | document.replaceChild(element)                   | Vymění HTML element za jiný                                   |
 
 
