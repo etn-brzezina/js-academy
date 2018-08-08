@@ -60,7 +60,7 @@ HTML DOM je prostředek který nám umožňuje přistupovat, měnit, přidávat 
 
 ## Práce s eventy
 
-V JavaSccriptu můžeme funkce reagující na nějakou událost definovat dvěma způsoby
+V JavaScriptu můžeme funkce reagující na nějakou událost definovat dvěma způsoby
 
 - Pomocí HTML Event atributů
 - Pomocí Event Listenerů
@@ -312,16 +312,26 @@ Kompletní seznam všechy typů eventů, metod a vlastností můžeme najít na 
 | document.createElement(element)                  | Vytvoří nový HTML element (ale nikam ho nevloží)              |
 | document.removeChild(element)                    | Odstraní HTML element                                         |
 | document.getElementById(id).appendChild(element) | Přidá na konec struktury (elementu s předaným id) nový HTML element
-| document.getElementById(id).insertBefore(element)| Přidá do struktury (za element s předaným id) nový HTML element |
+| document.getElementById(id).insertBefore(element)| Přidá do struktury (před element s předaným id) nový HTML element |
 | document.replaceChild(element)                   | Vymění HTML element za jiný                                   |
 
 
 ```html
 <html>
     <body>
-
+        <div id="root"></div>
         <script>
-            // TODO: TodoList Example
+            var wrapperElement = document.createElement('div');
+            var paragraph = document.createElement('p');
+            
+            // Přidání textu do odstavce
+            paragraph.innerText('Lorem ipsum dolor sit amet');
+            
+            // Přidání odstavce do wrapper divu
+            wrapperElement.appendChild(paragraph);
+            
+            // Přidání wrapper divu do dokumentu
+            document.getElementById('root').appendChild(wrapperElement);
         </script>
 
     </body>
