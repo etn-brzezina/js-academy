@@ -21,6 +21,9 @@ var $root = $("#root"); // => Array<Node>
 var root1 = document.getElementById("root"); // => Node
 var root2 = document.querySelector("#root"); // => Node
 var root3 = document.querySelectorAll("#root"); // => NodeList<Node>
+
+var items = document.getElementsByClassName("item"); // => NodeList<Node>
+var paragraphs = document.getElementsByTagName("p"); // => NodeList<Node>
 ```
 
 Proto je při práci v čistém JavaScriptu vždy přemýšlet nad tím, zda pracuji s jedním nebo více prvky.
