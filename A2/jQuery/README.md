@@ -161,6 +161,9 @@ document.querySelector("a").parentNode;
 $("a").remove();
 
 // Vanilla JS
+document.querySelector("a").remove();
+
+// Vanilla JS pro starší prohlížeče
 var element = document.querySelector("a");
 element.parentNode.removeChild(element);
 ```
